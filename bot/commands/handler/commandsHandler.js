@@ -2,14 +2,16 @@ const {readdirSync} = require("fs")
 const {resolve, join} = require("path")
 const { glob } = require('glob')
 
-const files = async (x) => x(await glob('commands/**/*.js'))
-//console.log(glob)
-files(console.log)
+
+//const files = async (x) => x(await glob('commands/**/*.js'))
+
+//files(console.log)
 
 module.exports = async function (client) {
     const folderPath = resolve(__dirname, '..')
     const folders = readdirSync(folderPath)
     const commandsFiles = await glob('commands/**/*.js', {ignore: 'node_modules/**'})
+    
     for(const file of commandsFiles){
         const filePath = join(folderPath,file)
         console.log(filePath)
@@ -35,4 +37,3 @@ module.exports = async function (client) {
     
 }
 
-module.exports(null)

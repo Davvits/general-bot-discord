@@ -1,4 +1,5 @@
 require("dotenv").config();
+const Handler = require('./handler/Handler')
 
 const commandHandler = require('./commands/handler/commandsHandler.js')
 const eventHandler = require('./events/eventsHandler.js')
@@ -6,11 +7,17 @@ const eventHandler = require('./events/eventsHandler.js')
 
 const { Client, Collection, GatewayIntentBits} = require("discord.js")
 
-const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers]
+const bot = new Client({
+    intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers
+    ]
 })
 
-client.commands = new Collection()
+bot.commands = new Collection()
+
 
 //Atribui os comandos para o bot
 commandHandler(client)
